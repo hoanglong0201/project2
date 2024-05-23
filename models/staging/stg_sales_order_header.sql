@@ -34,6 +34,5 @@ WITH stg_sales_order_header_source AS (
         ,CAST(TotalDue as decimal) AS total_due
     FROM stg_sales_order_header_handler_null
 )
-
 SELECT *
-FROM stg_sales_order_header_cast_rename
+FROM stg_sales_order_header_cast_rename 
