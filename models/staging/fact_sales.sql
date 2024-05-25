@@ -22,3 +22,5 @@ FROM `project-2-unigap.adventurework_dw.stg_sales_order_detail` AS sales_detail
 LEFT JOIN `project-2-unigap.adventurework_dw.stg_sales_order_header` AS sales_header
 ON sales_detail.sales_order_key = sales_header.sales_order_key
 )
+SELECT *
+FROM fact_sales

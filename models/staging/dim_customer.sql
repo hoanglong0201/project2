@@ -23,3 +23,5 @@ ON stg_sales_customer.territory_key = stg_sale_territory.territory_key
 LEFT JOIN `project-2-unigap.adventurework_dw.stg_person_countryregion` as stg_person_countryregion
 ON stg_sale_territory.country_region_key = stg_person_countryregion.country_region_key
 )
+SELECT *
+FROM dim_customer

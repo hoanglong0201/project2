@@ -10,8 +10,10 @@ SELECT
     ,sales_person.bonus
     ,sales_person.commission
 FROM `project-2-unigap.adventurework_dw.stg_sales_person` AS sales_person
-JOIN `project-2-unigap.adventurework_dw.stg_dim_person` AS person
+LEFT JOIN `project-2-unigap.adventurework_dw.stg_dim_person` AS person
 ON sales_person.person_key = person.person_key
-JOIN `project-2-unigap.adventurework_dw.stg_humanresource_employee` AS employee
+LEFT JOIN `project-2-unigap.adventurework_dw.stg_humanresource_employee` AS employee
 ON sales_person.person_key = employee.person_key
 ) 
+SELECT *
+FROM dim_sales_person
