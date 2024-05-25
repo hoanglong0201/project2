@@ -1,3 +1,4 @@
+WITH dim_product AS (
 SELECT 
       product.product_key
       ,product.product_name
@@ -18,9 +19,12 @@ SELECT
       ,product.standard_cost
       ,product.list_price
 FROM `project-2-unigap.adventurework_dw.stg_production_product` as product
-JOIN `project-2-unigap.adventurework_dw.stg_production_productsubcategory` as prosub
+LEFT JOIN `project-2-unigap.adventurework_dw.stg_production_productsubcategory` as prosub
 ON product.product_subcategory_key = prosub.product_subcategory_key
-JOIN `project-2-unigap.adventurework_dw.stg_production_productcategory` as procate
+LEFT JOIN `project-2-unigap.adventurework_dw.stg_production_productcategory` as procate
 ON prosub.product_category_key = procate.product_category_key
-JOIN `project-2-unigap.adventurework_dw.stg_production_model` as promodel
+LEFT JOIN `project-2-unigap.adventurework_dw.stg_production_model` as promodel
 ON product.product_model_key = promodel.product_model_key
+)
+SELECT *
+FROM dim_product

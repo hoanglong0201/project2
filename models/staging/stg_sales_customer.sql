@@ -39,6 +39,23 @@ With stg_dim_customer_source AS (
         
     FROM stg_dim_customer_handler_reseller
 )
-
+,stg_dim_customer_add_undefined_record AS (
+    SELECT
+        customer_key
+        ,person_key
+        ,store_key
+        ,territory_key
+        ,is_reseller
+        ,reseller_store_key
+    FROM stg_dim_customer_cast_rename
+    UNION ALL
+    SELECT
+        0 AS customer_key
+        ,0 AS person_key
+        ,0 AS store_key
+        ,0 AS territory_key
+        ,False AS is_reseller
+        ,0 AS reseller_store_key
+)
 SELECT *
-FROM stg_dim_customer_cast_rename
+FROM stg_dim_customer_add_undefined_record

@@ -11,6 +11,19 @@ WITH stg_sale_territory_source AS (
         ,CAST(stg_sale_territory_source.Group AS string) AS group_name
     FROM stg_sale_territory_source
 )
-
+,stg_sale_territory_add_undefined_record AS (
+    SELECT
+        territory_key
+        ,territory_name
+        ,country_region_key
+        ,group_name
+    FROM stg_sale_territory_cast_rename
+    UNION ALL
+    SELECT
+        0 AS territory_key
+        ,'Undefined' AS territory_name
+        ,'Undefined' AS country_region_key
+        ,'Undefined' AS group_name
+)
 SELECT *
-FROM stg_sale_territory_cast_rename
+FROM stg_sale_territory_add_undefined_record

@@ -19,9 +19,25 @@ WITH stg_dim_person_source AS (
         ,CAST(FirstName AS string) AS first_name
         ,CAST(MiddleName AS string) AS middle_name
         ,CAST(LastName AS string) AS last_name
-        ,CONCAT(FirstName,' ', MiddleName,' ',LastName) as full_name
     FROM stg_dim_person_handler_null
 )
-
+,stg_dim_person_add_undefine_record AS (
+    SELECT
+        person_key
+        ,person_title
+        ,first_name
+        ,middle_name
+        ,last_name
+        ,CONCAT(first_name,middle_name,last_name) as full_name
+    FROM stg_dim_person_cast_rename
+    UNION ALL
+    SELECT
+        0 AS person_key
+        ,'Undefined' AS person_title
+        ,'Undefined' AS first_name
+        ,'Undefined' AS middle_name
+        ,'Undefined' AS last_name
+        ,'Undefined' AS full_name
+)
 SELECT *
-FROM stg_dim_person_cast_rename
+FROM stg_dim_person_add_undefine_record

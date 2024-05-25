@@ -9,6 +9,15 @@ WITH stg_sale_storeid_source AS (
         ,CAST(Name as string) AS store_name
     FROM stg_sale_storeid_source
 )
-
+,stg_sale_storeid_add_undefined_record AS (
+    SELECT
+        store_key
+        ,store_name
+    FROM stg_sale_storeid_cast_rename
+    UNION ALL
+    SELECT
+        0 AS store_key
+        ,'Undefined' AS store_name
+)
 SELECT *
-FROM stg_sale_storeid_cast_rename
+FROM stg_sale_storeid_add_undefined_record
